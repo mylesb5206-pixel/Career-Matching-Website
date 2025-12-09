@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Matching System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="menu-bar">
+        <div class="menu-container">
+            <div class="menu-logo">
+                <span class="logo-icon">🎯</span>
+                <span class="logo-text">Career Matcher</span>
+            </div>
+            <ul class="menu-items">
+                <li><a href="#home" class="menu-link active" data-section="home">Home</a></li>
+                <li><a href="#quiz" class="menu-link" data-section="quiz">Take Quiz</a></li>
+                <li><a href="#about" class="menu-link" data-section="about">About</a></li>
+                <li><a href="#contact" class="menu-link" data-section="contact">Contact</a></li>
+            </ul>
+            <div class="menu-auth">
+                <button id="loginBtn" class="auth-btn login-btn">Login</button>
+                <button id="signupBtn" class="auth-btn signup-btn">Sign Up</button>
+                <div id="userProfile" class="user-profile" style="display: none;">
+                    <span class="user-icon">👤</span>
+                    <span id="userName" class="user-name"></span>
+                    <button id="logoutBtn" class="logout-btn">Logout</button>
+                </div>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeLogin">&times;</span>
+            <h2>Welcome Back!</h2>
+            <p class="modal-subtitle">Login to save your career matches</p>
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <p class="auth-switch">Don't have an account? <a href="#" id="switchToSignup">Sign up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSignup">&times;</span>
+            <h2>Create Account</h2>
+            <p class="modal-subtitle">Join us to track your career journey</p>
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+                <p class="auth-switch">Already have an account? <a href="#" id="switchToLogin">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <header class="app-header">
+        <h1>🎯 Career Matching System</h1>
+        <p>Find your perfect career based on your interests, skills, and goals</p>
+    </header>
+
+    <main class="app-main">
+        <!-- About Us Section -->
+        <div id="aboutSection" class="about-section" style="display: none;">
+            <div class="about-container">
+                <h1 class="about-title">About Career Matcher</h1>
+                
+                <div class="about-intro">
+                    <p>Welcome to Career Matcher - your intelligent companion in discovering the perfect career path that aligns with your unique skills, interests, and aspirations.</p>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-card">
+                        <div class="card-icon">🎯</div>
+                        <h3>Our Mission</h3>
+                        <p>We believe everyone deserves to find a career they're passionate about. Our mission is to simplify the career discovery process by using smart algorithms and AI technology to match you with careers that truly fit your profile.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">🚀</div>
+                        <h3>How It Works</h3>
+                        <p>Our advanced matching system analyzes your interests, skills, education level, preferred work style, and salary expectations. Using a comprehensive database of 15+ career paths, we calculate compatibility scores to present you with the best matches.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">🤖</div>
+                        <h3>AI-Powered Guidance</h3>
+                        <p>Integrated with Google Gemini AI, we offer personalized career advice, interview preparation tips, and skill development recommendations. Get instant answers to all your career-related questions from our intelligent advisor.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">📊</div>
+                        <h3>Data-Driven Results</h3>
+                        <p>Our matching algorithm considers multiple factors including salary ranges, job growth projections, and required qualifications to ensure you receive accurate and relevant career suggestions that match your real-world needs.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">🔒</div>
+                        <h3>Your Privacy Matters</h3>
+                        <p>All your information is stored locally on your device. We don't collect or share your personal data with third parties. Your career journey is completely private and secure.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="card-icon">💡</div>
+                        <h3>Continuous Improvement</h3>
+                        <p>We're constantly updating our career database and improving our matching algorithms to provide you with the most accurate and up-to-date career guidance available.</p>
+                    </div>
+                </div>
+
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Career Paths</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Free to Use</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">AI</div>
+                        <div class="stat-label">Powered Advice</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Available</div>
+                    </div>
+                </div>
+
+                <div class="creators-section">
+                    <h2 class="creators-title">Meet the Creators</h2>
+                    <p class="creators-intro">This project was created by passionate students from BUS202 who believe in the power of technology to help people find their dream careers.</p>
+                    
+                    <div class="creators-grid">
+                        <div class="creator-card">
+                            <div class="creator-avatar">👨‍💻</div>
+                            <h3 class="creator-name">Your Name Here</h3>
+                            <p class="creator-role">Full Stack Developer</p>
+                            <p class="creator-bio">Passionate about creating innovative solutions that make career discovery accessible to everyone.</p>
+                            <div class="creator-skills">
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">AI Integration</span>
+                            </div>
+                        </div>
+
+                        <div class="creator-card">
+                            <div class="creator-avatar">👩‍💼</div>
+                            <h3 class="creator-name">Team Member 2</h3>
+                            <p class="creator-role">UX/UI Designer</p>
+                            <p class="creator-bio">Dedicated to crafting beautiful and intuitive user experiences that guide people to their goals.</p>
+                            <div class="creator-skills">
+                                <span class="skill-tag">Design</span>
+                                <span class="skill-tag">CSS</span>
+                                <span class="skill-tag">User Research</span>
+                            </div>
+                        </div>
+
+                        <div class="creator-card">
+                            <div class="creator-avatar">👨‍🎓</div>
+                            <h3 class="creator-name">Team Member 3</h3>
+                            <p class="creator-role">Data Analyst</p>
+                            <p class="creator-bio">Focused on building smart algorithms that deliver accurate and meaningful career matches.</p>
+                            <div class="creator-skills">
+                                <span class="skill-tag">Algorithms</span>
+                                <span class="skill-tag">Analytics</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-info">
+                        <h3>📚 Academic Project</h3>
+                        <p><strong>Course:</strong> BUS202 - Business Technology & Innovation</p>
+                        <p><strong>Institution:</strong> Your University Name</p>
+                        <p><strong>Year:</strong> 2025</p>
+                        <p><strong>Technologies:</strong> HTML5, CSS3, JavaScript, Google Gemini AI API</p>
+                    </div>
+                </div>
+
+                <div class="about-cta">
+                    <h2>Ready to Find Your Perfect Career?</h2>
+                    <p>Take our comprehensive career assessment quiz and discover opportunities that match your unique profile.</p>
+                    <button id="aboutToQuiz" class="submit-btn">Take the Quiz Now</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="formContainer" class="career-form-container">
+            <form id="careerForm" class="career-form">
+                <div class="form-section">
+                    <h2>📌 Select Your Interests</h2>
+                    <p class="form-hint">Choose at least one (select multiple)</p>
+                    <div class="checkbox-grid" id="interestsGrid"></div>
+                </div>
+
+                <div class="form-section">
+                    <h2>💪 Select Your Skills</h2>
+                    <p class="form-hint">Choose at least one (select multiple)</p>
+                    <div class="checkbox-grid" id="skillsGrid"></div>
+                </div>
+
+                <div class="form-section">
+                    <h2>🎓 Education Level</h2>
+                    <div class="select-group">
+                        <select id="education" class="form-select">
+                            <option value="high-school">High School</option>
+                            <option value="associate">Associate Degree</option>
+                            <option value="bachelor" selected>Bachelor's Degree</option>
+                            <option value="master">Master's Degree</option>
+                            <option value="doctorate">Doctorate/PhD</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>🏢 Preferred Work Style</h2>
+                    <div class="select-group">
+                        <select id="workStyle" class="form-select">
+                            <option value="team" selected>Team-oriented</option>
+                            <option value="independent">Independent Work</option>
+                            <option value="structured">Structured Environment</option>
+                            <option value="fast-paced">Fast-paced</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>💰 Minimum Salary Expectation</h2>
+                    <div class="select-group">
+                        <select id="salary" class="form-select">
+                            <option value="any" selected>Any Salary</option>
+                            <option value="40000">$40,000+</option>
+                            <option value="50000">$50,000+</option>
+                            <option value="60000">$60,000+</option>
+                            <option value="70000">$70,000+</option>
+                            <option value="80000">$80,000+</option>
+                            <option value="90000">$90,000+</option>
+                            <option value="100000">$100,000+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>📍 Your Location</h2>
+                    <p class="form-hint">Enter your city to find local job opportunities</p>
+                    <div class="select-group">
+                        <input type="text" id="userLocation" class="form-input" placeholder="e.g., New York, Los Angeles, Chicago">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Find My Career Matches 🚀
+                </button>
+            </form>
+        </div>
+
+        <div id="resultsContainer" class="career-results" style="display: none;">
+            <div class="results-header">
+                <h2>🎉 Your Career Matches</h2>
+                <p id="resultsCount"></p>
+                <button id="resetBtn" class="reset-btn">
+                    ← Start New Search
+                </button>
+            </div>
+            <div id="resultsGrid" class="results-grid"></div>
+            
+            <!-- AI Career Advisor -->
+            <div class="ai-advisor-section">
+                <div class="ai-advisor-header">
+                    <h2>🤖 AI Career Advisor</h2>
+                    <p>Get personalized career advice powered by Google Gemini AI</p>
+                </div>
+                <div class="ai-setup" id="aiSetup">
+                    <p>To use the AI Career Advisor, you need a free Gemini API key:</p>
+                    <ol>
+                        <li>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a></li>
+                        <li>Click "Get API Key" (requires Google account)</li>
+                        <li>Copy your API key and paste it below</li>
+                    </ol>
+                    <div class="api-key-input">
+                        <input type="password" id="apiKeyInput" placeholder="Paste your Gemini API key here" />
+                        <button id="saveApiKey" class="submit-btn">Save & Start Chat</button>
+                    </div>
+                    <p class="privacy-note">🔒 Your API key is stored locally in your browser only</p>
+                </div>
+                <div class="ai-chat-container" id="aiChatContainer" style="display: none;">
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chatInput" placeholder="Ask me anything about your career matches..." />
+                        <button id="sendMessage" class="chat-send-btn">Send</button>
+                    </div>
+                    <button id="clearApiKey" class="clear-key-btn">Change API Key</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2025 Career Matching System | BUS202 Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
