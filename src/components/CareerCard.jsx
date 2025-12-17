@@ -66,6 +66,42 @@ function CareerCard({ career }) {
           ))}
         </ul>
       </div>
+
+      <div className="job-listings-section">
+        <h4>💼 Available Positions:</h4>
+        <div className="job-item">
+          <div className="job-header">
+            <div>
+              <div className="job-title">{career.title} - Entry Level</div>
+              <div className="job-company">Tech Solutions Inc.</div>
+              <div className="job-location">📍 Remote / Hybrid</div>
+            </div>
+            <span className="job-badge">New</span>
+          </div>
+        </div>
+        <div className="job-item">
+          <div className="job-header">
+            <div>
+              <div className="job-title">Senior {career.title}</div>
+              <div className="job-company">Innovation Corp</div>
+              <div className="job-location">📍 New York, NY</div>
+            </div>
+            <span className="job-badge">Featured</span>
+          </div>
+        </div>
+        <div className="job-item">
+          <div className="job-header">
+            <div>
+              <div className="job-title">{career.title} Specialist</div>
+              <div className="job-company">Future Enterprises</div>
+              <div className="job-location">📍 San Francisco, CA</div>
+            </div>
+          </div>
+        </div>
+        <button className="view-more-jobs">
+          View All {career.title} Jobs →
+        </button>
+      </div>
     </div>
   )
 }

@@ -6,11 +6,20 @@ import './App.css'
 function App() {
   const [matches, setMatches] = useState([])
   const [showResults, setShowResults] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
 
   const handleMatch = (userPreferences) => {
     const matchedCareers = findCareerMatches(userPreferences)
     setMatches(matchedCareers)
     setShowResults(true)
+    setActiveSection('results')
+  }
+
+  const handleNavigation = (section) => {
+    setActiveSection(section)
+    if (section === 'home') {
+      setShowResults(false)
+    }
   }
 
   const findCareerMatches = (preferences) => {
@@ -278,16 +287,147 @@ function App() {
 
   return (
     <div className="App">
+      <nav className="app-nav">
+        <div className="nav-container">
+          <div className="nav-logo">💼 CareerMatch Pro</div>
+          <ul className="nav-menu">
+            <li className={activeSection === 'home' ? 'active' : ''} onClick={() => handleNavigation('home')}>Home</li>
+            <li className={activeSection === 'about' ? 'active' : ''} onClick={() => handleNavigation('about')}>About Us</li>
+            <li className={activeSection === 'careers' ? 'active' : ''} onClick={() => handleNavigation('careers')}>Browse Careers</li>
+            <li className={activeSection === 'resources' ? 'active' : ''} onClick={() => handleNavigation('resources')}>Resources</li>
+            <li className={activeSection === 'contact' ? 'active' : ''} onClick={() => handleNavigation('contact')}>Contact</li>
+          </ul>
+        </div>
+      </nav>
+
       <header className="app-header">
-        <h1>🎯 Career Matching System</h1>
-        <p>Find your perfect career based on your interests, skills, and goals</p>
+        <div className="header-overlay"></div>
+        <div className="header-content">
+          <h1>Career Matching Platform</h1>
+          <p>Find your perfect career path based on your interests, skills, and goals</p>
+          {activeSection === 'home' && !showResults && (
+            <button className="cta-button" onClick={() => document.getElementById('career-form').scrollIntoView({ behavior: 'smooth' })}>
+              Start Your Career Journey
+            </button>
+          )}
+        </div>
       </header>
 
       <main className="app-main">
-        {!showResults ? (
-          <CareerForm onSubmit={handleMatch} />
-        ) : (
-          <CareerResults matches={matches} onReset={handleReset} />
+        {activeSection === 'home' && (
+          <>
+            {!showResults ? (
+              <div id="career-form">
+                <CareerForm onSubmit={handleMatch} />
+              </div>
+            ) : (
+              <CareerResults matches={matches} onReset={() => handleNavigation('home')} />
+            )}
+          </>
+        )}
+
+        {activeSection === 'about' && (
+          <div className="content-section">
+            <div className="about-hero">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=400&fit=crop" alt="Team collaboration" className="section-image" />
+            </div>
+            <h2>About CareerMatch Pro</h2>
+            <p>We're dedicated to helping professionals find their ideal career paths through data-driven matching and expert guidance.</p>
+            <div className="stats-grid">
+              <div className="stat-card">
+                <h3>10,000+</h3>
+                <p>Successful Matches</p>
+              </div>
+              <div className="stat-card">
+                <h3>500+</h3>
+                <p>Career Paths</p>
+              </div>
+              <div className="stat-card">
+                <h3>95%</h3>
+                <p>Satisfaction Rate</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeSection === 'careers' && (
+          <div className="content-section">
+            <div className="careers-hero">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=400&fit=crop" alt="Business professionals" className="section-image" />
+            </div>
+            <h2>Browse All Career Paths</h2>
+            <p>Explore diverse career opportunities across industries</p>
+            <div className="career-categories">
+              <div className="category-card">
+                <h3>💻 Technology</h3>
+                <p>Software, Data Science, IT</p>
+              </div>
+              <div className="category-card">
+                <h3>🏥 Healthcare</h3>
+                <p>Medical, Nursing, Therapy</p>
+              </div>
+              <div className="category-card">
+                <h3>💼 Business</h3>
+                <p>Management, Finance, Marketing</p>
+              </div>
+              <div className="category-card">
+                <h3>🎨 Creative</h3>
+                <p>Design, Arts, Media</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeSection === 'resources' && (
+          <div className="content-section">
+            <div className="resources-hero">
+              <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=1200&h=400&fit=crop" alt="Office workspace" className="section-image" />
+            </div>
+            <h2>Career Resources</h2>
+            <p>Tools and guides to help you succeed in your career journey</p>
+            <div className="resources-grid">
+              <div className="resource-card">
+                <h3>📚 Resume Builder</h3>
+                <p>Create a professional resume that stands out</p>
+              </div>
+              <div className="resource-card">
+                <h3>🎯 Interview Prep</h3>
+                <p>Practice common interview questions</p>
+              </div>
+              <div className="resource-card">
+                <h3>📊 Salary Guide</h3>
+                <p>Research industry salary ranges</p>
+              </div>
+              <div className="resource-card">
+                <h3>🌟 Career Coaching</h3>
+                <p>Connect with professional career coaches</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeSection === 'contact' && (
+          <div className="content-section">
+            <div className="contact-hero">
+              <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1200&h=400&fit=crop" alt="Contact us" className="section-image" />
+            </div>
+            <h2>Get In Touch</h2>
+            <p>Have questions? We're here to help you on your career journey.</p>
+            <div className="contact-info">
+              <div className="contact-card">
+                <h3>📧 Email</h3>
+                <p>info@careermatchpro.com</p>
+              </div>
+              <div className="contact-card">
+                <h3>📞 Phone</h3>
+                <p>1-800-CAREER-1</p>
+              </div>
+              <div className="contact-card">
+                <h3>📍 Location</h3>
+                <p>123 Business Ave, Suite 100</p>
+              </div>
+            </div>
+          </div>
         )}
       </main>
 
